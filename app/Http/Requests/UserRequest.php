@@ -60,11 +60,22 @@ class UserRequest extends FormRequest
 
     public function getUserPayload()
     {
-        return collect($this->validated())
+/*         return collect($this->validated())
             ->merge([
                 'role_ids' => json_encode($this->role_ids), // Assuming role_ids is an array in the request
                 'creator_id' => $this->user()->id,
             ])
-            ->toArray();
+            ->toArray(); */
+        $data = collect($this->validated())
+            ->merge([
+                'role_ids' => json_encode($this->role_ids),
+                'creator_id' => $this->user()->id,
+            ]);
+
+        // ❌ Remove password if it’s empty or null
+        if (empty($this->password)) {
+            $data->forget('password');
+        }
+        return $data->toArray();
     }
 }

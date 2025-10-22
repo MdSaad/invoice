@@ -70,9 +70,14 @@ class User extends Authenticatable implements HasMedia
 
     public function setPasswordAttribute($value)
     {
-        if ($value != null) {
+        if (!empty($value)) {
+        // Avoid double-hashing
+        if (!preg_match('/^\$2y\$/', $value)) {
             $this->attributes['password'] = bcrypt($value);
+        } else {
+            $this->attributes['password'] = $value;
         }
+    }
     }
 
     public function isSuperAdminOrAdmin()
