@@ -33,7 +33,7 @@ class BootstrapController extends Controller
         $main_menu = getMenuByLocation('Sidebar');
         $top_menu = getMenuByLocation('Topbar');
 
-        //dd($current_user);
+       // dd($top_menu);
 
         $setting_menu = $this->generateMenu('setting_menu', $current_user);
 

@@ -1,6 +1,9 @@
 <template>
   <ul class="flex space-x-1 z-50">
-    <li v-for="(item, index) in menus" :key="item.id">
+    <li v-for="(item, index) in menus" :key="item.id"
+      :class="{
+        'submenu-border': !item.children_recursive?.length,
+      }">
       <div class="flex items-center gap-4 font-normal text-gray-700">
         <button
           @click="toggleSubmenu(index)"
@@ -47,7 +50,7 @@
         <TopMenuTree
           v-if="item.children_recursive?.length && isSubmenuOpen(index)"
           :menus="item.children_recursive"
-          class="z-50 absolute ml-4 pl-0 border-gray-300 mt-1"
+          class="submenu-level z-50 absolute ml-4 pl-0 bg-black text-white border border-gray-700 mt-1"
         />
       </transition>
     </li>
@@ -95,5 +98,16 @@ function isActive(path) {
 .fade-leave-to {
   opacity: 0;
   transform: translateY(-4px);
+}
+.submenu-level li {
+  padding: 2px;
+  right: 2px
+}
+.submenu-level li a{
+  white-space: nowrap;
+}
+/* ✅ white right border for submenu items only */
+.submenu-border {
+  @apply border-r border-white;
 }
 </style>

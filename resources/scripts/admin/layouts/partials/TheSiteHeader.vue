@@ -61,36 +61,11 @@
       <BaseIcon name="Bars3Icon" class="!w-6 !h-6 text-gray-500" />
     </div>
     <div class="flex w-full justify-left md:justify-start z-9999">
-  <!--<nav class="px-4 py-2">
-     <ul class="flex space-x-6">
-      <li v-for="(item, index) in menu" :key="index" class="relative group">
-
-        <a
-          href="#"
-          class="font-medium"
-        >
-          {{ item.title }}
-        </a>
-        <ul
-          v-if="item.children"
-          class="absolute left-0 top-full mt-2 bg-white border rounded shadow-md opacity-0 group-hover:opacity-100 invisible group-hover:visible transition duration-200 z-50"
-        >
-          <li
-            v-for="(child, childIndex) in item.children"
-            :key="childIndex"
-            class="px-4 py-2 whitespace-nowrap hover:bg-gray-100"
-          >
-            <a href="#">{{ child.title }}</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </nav>-->
-  <nav class="px-4 py-2">
-      <div class="flex space-x-6">
-          <TopMenuTree :menus="globalStore.topMenu" />
-      </div>
-  </nav>
+    <nav class="px-4 py-2">
+        <div class="flex space-x-6">
+            <TopMenuTree :menus="globalStore.topMenu" />
+        </div>
+    </nav>
     </div>
 
     <ul class="flex float-right h-8 m-0 list-none md:h-9">
