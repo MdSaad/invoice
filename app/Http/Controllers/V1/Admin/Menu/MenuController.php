@@ -88,6 +88,7 @@ class MenuController extends Controller
     public function delete(DeleteMenuRequest $request)
     {
         $this->authorize('delete multiple menus');
+       // $this->authorize('delete', Menu::class);
 
         Menu::deleteMenu($request->ids);
 

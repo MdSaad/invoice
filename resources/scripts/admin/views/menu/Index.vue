@@ -28,10 +28,10 @@
               <BaseIcon v-else name="XMarkIcon" :class="slotProps.class" />
             </template>
           </BaseButton>
-
+ <!-- @click="$router.push('menu/create')" -->
           <BaseButton
             v-if="userStore.hasAbilities(abilities.CREATE_MENU)"
-            @click="$router.push('menu/create')"
+            @click="openCreateMenu"
           >
             <template #left="slotProps">
               <BaseIcon name="PlusIcon" :class="slotProps.class" />
@@ -77,9 +77,8 @@
       :description="$t('menu.list_of_menu')"
     >
       <AstronautIcon class="mt-5 mb-4" />
-
       <template #actions>
-        <BaseButton
+        <BaseButton id="btnAdd"
           v-if="userStore.hasAbilities(abilities.CREATE_MENU)"
           variant="primary-outline"
           @click="$router.push('/admin/menu/create')"
@@ -189,7 +188,7 @@ import { useUserStore } from '@/scripts/admin/stores/user'
 import { useDialogStore } from '@/scripts/stores/dialog'
 import { debouncedWatch } from '@vueuse/core'
 import moment from 'moment'
-import { computed, onUnmounted, reactive, ref } from 'vue'
+import { computed, onUnmounted, reactive, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
 const route = useRoute()
@@ -210,8 +209,13 @@ let showFilters = ref(false)
 let isFetchingInitialData = ref(true)
 const { t } = useI18n()
 
+watch(() => route.query.parent_id, () => {
+  filters.parent_id = route.query.parent_id ?? ''
+  refreshTable()
+})
+
 let filters = reactive({
-  parent_id:'',
+  parent_id:route.query.parent_id ?? '',
   en: ''
 })
 let filtersData = [];
@@ -411,12 +415,23 @@ function removeMultiplemenu() {
     })
     .then((res) => {
       if (res) {
-        menuStore.deleteMultiplemenu().then((response) => {
+        menuStore.deleteMultipleMenu().then((response) => {
           if (response.data) {
             refreshTable()
           }
         })
       }
     })
+}
+
+const parentId = route.query.parent_id ?? null
+
+const openCreateMenu = () => {
+  console.log('Open Create Menu clicked, parentId:', parentId);
+  if (parentId) {
+    router.push({ path: '/admin/menu/create', query: { parent_id: parentId } })
+  } else {
+    router.push('/admin/menu/create')
+  }
 }
 </script>

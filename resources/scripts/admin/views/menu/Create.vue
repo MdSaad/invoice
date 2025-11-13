@@ -260,6 +260,8 @@ menuStore.resetCurrentMenu()
 
 menuStore.fetchMenuInitialSettings(isEdit.value)
 
+const parentId = route.query.parent_id ?? null
+
 async function submitMenuData() {
   //console.log('submitMenuData called')
   v$.value.$touch()
@@ -272,6 +274,7 @@ async function submitMenuData() {
 
   let data = {
     ...menuStore.currentMenu,
+    parent_id: parentId,
   }
   let response = null
 
@@ -284,7 +287,10 @@ async function submitMenuData() {
     isSaving.value = false
     return
   }
-
+  if(parentId){
+    router.push(`/admin/menu?parent_id=${parentId}`)
+    return
+  }
   router.push(`/admin/menu`)
 }
 </script>

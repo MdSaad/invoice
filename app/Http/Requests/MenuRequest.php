@@ -20,6 +20,10 @@ class MenuRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
+            'parent_id' => [
+                'nullable',
+                'exists:menus,id',
+            ],
             'order_no' => [
                 'required',
             ],
@@ -50,6 +54,7 @@ class MenuRequest extends FormRequest
         $slug = slugify($this->path == '#' ? $this->en : $this->path);
         return collect($this->validated())
             ->only([
+                'parent_id',
                 'order_no',
                 'en',
                 'bn',

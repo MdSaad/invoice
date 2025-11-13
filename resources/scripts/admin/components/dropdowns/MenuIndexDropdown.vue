@@ -50,13 +50,12 @@
       {{ $t('general.delete') }}
     </BaseDropdownItem>
     <!-- Next Layer Menu  -->
-     <router-link
-      :to="`/admin/menu`"
+     <router-link v-if="row.path=== '#'"
+      :to="{ path: '/admin/menu', query: { parent_id: row.id } }"
     >
-    <BaseDropdownItem
-    v-if="row.path=== '#'"
-    @click="goToNextLayer()"
-    >
+    <!-- v-if="row.path=== '#'"
+    @click="goToNextLayer()" -->
+    <BaseDropdownItem>
       <BaseIcon
         name="ArrowUturnRightIcon"
         class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
