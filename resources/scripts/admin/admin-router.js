@@ -125,6 +125,11 @@ const MenuIndex = () => import('@/scripts/admin/views/menu/Index.vue')
 const MenuCreate = () => import('@/scripts/admin/views/menu/Create.vue')
 const MenuView = () => import('@/scripts/admin/views/menu/View.vue')
 
+// Division
+const DivisionIndex = () => import('@/scripts/admin/views/division/Index.vue')
+const DivisionCreate = () => import('@/scripts/admin/views/division/Create.vue')
+const DivisionView = () => import('@/scripts/admin/views/division/View.vue')
+
 export default [
   {
     path: '/installation',
@@ -563,6 +568,38 @@ export default [
         name: 'menu.edit',
         meta: { ability: abilities.EDIT_INVOICE },
         component: MenuCreate,
+      },
+      // division
+      {
+        path: 'global_settings/region_area_settings',
+        name: 'global_settings.region_area_settings',
+        children: 
+        [
+          {
+            path: 'division',
+            name: 'division.index',
+            meta: { ability: abilities.VIEW_INVOICE },
+            component: DivisionIndex,
+          },
+          {
+            path: 'division/create',
+            name: 'division.create',
+            meta: { ability: abilities.CREATE_INVOICE },
+            component: DivisionCreate,
+          },
+          {
+            path: 'division/:id/view',
+            name: 'division.view',
+            meta: { ability: abilities.VIEW_INVOICE },
+            component: DivisionView,
+          },
+          {
+            path: 'division/:id/edit',
+            name: 'division.edit',
+            meta: { ability: abilities.EDIT_INVOICE },
+            component: DivisionCreate,
+          }
+       ]
       },
     ],
   },

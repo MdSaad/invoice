@@ -1683,6 +1683,27 @@
     "updated_message": "Menu updated successful",
     "deleted_message": "Menu deleted successful"
   },
+  "division": {
+    "title": "Divisions",
+    "division": "Division",
+    "new_division": "New Division",
+    "add_division": "Add Division",
+    "edit_division": "Edit Division",
+    "division_en_name": "Division Name(English)",
+    "division_bn_name": "Division Name(Bangla)",
+    "division_short_name": "Division Short Name",
+    "division_code": "Division Code",
+    "division_description": "Division Description",
+    "division_added": "Division Added",
+    "division_updated": "Division Updated",
+    "division_confirm_delete": "You will not be able to recover this Division",
+    "already_in_use": "Division is already in use",
+    "deleted_message": "Division deleted successfully",
+    "url": "URL",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "order_no": "Order No"
+  },
   "hr":{
     "employee": "Employee",
     "new_employee": "New Employee",

@@ -67,6 +67,7 @@ use App\Http\Controllers\V1\Admin\Payment\SendPaymentController;
 use App\Http\Controllers\V1\Admin\Payment\SendPaymentPreviewController;
 use App\Http\Controllers\V1\Admin\RecurringInvoice\RecurringInvoiceController;
 use App\Http\Controllers\V1\Admin\RecurringInvoice\RecurringInvoiceFrequencyController;
+use App\Http\Controllers\V1\Admin\Region\DivisionController;
 use App\Http\Controllers\V1\Admin\Role\AbilitiesController;
 use App\Http\Controllers\V1\Admin\Role\RolesController;
 use App\Http\Controllers\V1\Admin\Scope\ScopeController;
@@ -282,20 +283,12 @@ Route::prefix('/v1')->group(function () {
 
             // menus
             // -------------------------------------------------
-
-/*             Route::get('/menus/{menu}/send/preview', SendmenuPreviewController::class);
-
-            Route::post('/menus/{menu}/send', SendmenuController::class);
-
-            Route::post('/menus/{menu}/clone', ClonemenuController::class);
-
-            Route::post('/menus/{menu}/status', ChangemenuStatusController::class);
-
-            
-            Route::get('/menus/templates', menuTemplatesController::class); */
-            
             Route::post('/menu/delete', [MenuController::class, 'delete']);
             Route::apiResource('menu', MenuController::class);
+            // Division
+            // -------------------------------------------------
+            Route::post('/division/delete', [DivisionController::class, 'delete']);
+            Route::apiResource('division', DivisionController::class);
 
             // Recurring Invoice
             // -------------------------------------------------
