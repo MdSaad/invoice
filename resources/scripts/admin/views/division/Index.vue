@@ -28,9 +28,8 @@
               <BaseIcon v-else name="XMarkIcon" :class="slotProps.class" />
             </template>
           </BaseButton>
- <!-- @click="$router.push('division/create')" -->
           <BaseButton
-            v-if="userStore.hasAbilities(abilities.CREATE_MENU)"
+            v-if="userStore.hasAbilities(abilities.CREATE_Division)"
             @click="openCreateDivision"
           >
             <template #left="slotProps">
@@ -51,6 +50,14 @@
           autocomplete="off"
         />
       </BaseInputGroup>
+      <BaseInputGroup :label="$t('division.division_bn_name')" class="text-left">
+        <BaseInput
+          v-model="filters.division_bn_name"
+          type="text"
+          name="division_bn_name"
+          autocomplete="off"
+        />
+      </BaseInputGroup>
     </BaseFilterWrapper>
 
     <BaseEmptyPlaceholder
@@ -61,7 +68,7 @@
       <AstronautIcon class="mt-5 mb-4" />
       <template #actions>
         <BaseButton id="btnAdd"
-          v-if="userStore.hasAbilities(abilities.CREATE_MENU)"
+          v-if="userStore.hasAbilities(abilities.CREATE_Division)"
           variant="primary-outline"
           @click="$router.push('/admin/global_settings/region_area_settings/division/create')"
         >
@@ -190,7 +197,8 @@ let isFetchingInitialData = ref(true)
 const { t } = useI18n()
 
 let filters = reactive({
-  division_en_name: ''
+  division_en_name: '',
+  division_bn_name: ''
 })
 let filtersData = [];
 
@@ -283,15 +291,16 @@ function setFilters() {
 }
 function hasAtleastOneAbility() {
   return userStore.hasAbilities([
-    abilities.DELETE_MENU,
-    abilities.EDIT_MENU,
-    abilities.VIEW_MENU,
+    abilities.DELETE_Division,
+    abilities.EDIT_Division,
+    abilities.VIEW_Division,
   ])
 }
 
 async function fetchData(page, filter,sort) {
   let data = {
     division_en_name: filters.division_en_name,
+    division_bn_name: filters.division_bn_name,
     orderByField: 'order_no',
     orderBy: 'asc',
     page:filters.page || 1,
@@ -349,6 +358,6 @@ function removeMultipledivision() {
     })
 }
 const openCreateDivision = () => {
-  router.push({ path: '/global_settings/region_area_settings'})
+  router.push({ path: '/admin/global_settings/region_area_settings/division/create'})
 }
 </script>

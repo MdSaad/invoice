@@ -1,13 +1,13 @@
 <template>
   <BasePage>
-    <form @submit.prevent="submitMenuData">
+    <form @submit.prevent="submitDivisionData">
       <BasePageHeader :title="pageTitle">
         <BaseBreadcrumb>
           <BaseBreadcrumbItem :title="$t('general.home')" to="dashboard" />
 
           <BaseBreadcrumbItem
-            :title="$t('menu.menu', 2)"
-            to="/admin/menu"
+            :title="$t('division.division', 2)"
+            to="/admin/division"
           />
 
           <BaseBreadcrumb-item :title="pageTitle" to="#" active />
@@ -21,8 +21,8 @@
               </template>
               {{
                 isEdit
-                  ? $t('menu.update_menu')
-                  : $t('menu.save_menu')
+                  ? $t('division.update_division')
+                  : $t('division.save_division')
               }}
             </BaseButton>
           </div>
@@ -34,147 +34,99 @@
         <div class="grid grid-cols-5 gap-4 mb-8">
           <BaseInputGrid class="col-span-5 lg:col-span-6">
             <BaseInputGroup
-              :label="$t('menu.order_no')"
+              :label="$t('division.order_no')"
               required
               :error="
-                v$.currentMenu.order_no.$error &&
-                v$.currentMenu.order_no.$errors[0].$message
+                v$.currentDivision.order_no.$error &&
+                v$.currentDivision.order_no.$errors[0].$message
               "
               :content-loading="isFetchingInitialData"
             >
               <BaseInput
-                v-model="menuStore.currentMenu.order_no"
+                v-model="divisionStore.currentDivision.order_no"
                 :content-loading="isFetchingInitialData"
                 type="text"
                 name="order_no"
                 class=""
-                :invalid="v$.currentMenu.order_no.$error"
-                @input="v$.currentMenu.order_no.$touch()"
+                :invalid="v$.currentDivision.order_no.$error"
+                @input="v$.currentDivision.order_no.$touch()"
               />
             </BaseInputGroup>
             <BaseInputGroup
-              :label="$t('menu.en')"
+              :label="$t('division.division_en_name')"
               required
               :error="
-                v$.currentMenu.en.$error &&
-                v$.currentMenu.en.$errors[0].$message
+                v$.currentDivision.division_en_name.$error &&
+                v$.currentDivision.division_en_name.$errors[0].$message
               "
               :content-loading="isFetchingInitialData"
             >
               <BaseInput
-                v-model="menuStore.currentMenu.en"
+                v-model="divisionStore.currentDivision.division_en_name"
                 :content-loading="isFetchingInitialData"
                 type="text"
-                name="en"
+                name="division_en_name"
                 class=""
-                :invalid="v$.currentMenu.en.$error"
-                @input="v$.currentMenu.en.$touch()"
+                :invalid="v$.currentDivision.division_en_name.$error"
+                @input="v$.currentDivision.division_en_name.$touch()"
               />
             </BaseInputGroup>
             <BaseInputGroup
-              :label="$t('menu.bn')"
+              :label="$t('division.division_bn_name')"
               required
               :error="
-                v$.currentMenu.bn.$error &&
-                v$.currentMenu.bn.$errors[0].$message
+                v$.currentDivision.division_bn_name.$error &&
+                v$.currentDivision.division_bn_name.$errors[0].$message
               "
               :content-loading="isFetchingInitialData"
             >
               <BaseInput
-                v-model="menuStore.currentMenu.bn"
+                v-model="divisionStore.currentDivision.division_bn_name"
                 :content-loading="isFetchingInitialData"
                 type="text"
-                name="bn"
+                name="division_bn_name"
                 class=""
-                :invalid="v$.currentMenu.bn.$error"
-                @input="v$.currentMenu.bn.$touch()"
+                :invalid="v$.currentDivision.division_bn_name.$error"
+                @input="v$.currentDivision.division_bn_name.$touch()"
               />
             </BaseInputGroup>
             <BaseInputGroup
-              :label="$t('menu.path')"
+              :label="$t('division.division_short_name')"
               required
               :error="
-                v$.currentMenu.path.$error &&
-                v$.currentMenu.path.$errors[0].$message
+                v$.currentDivision.division_short_name.$error &&
+                v$.currentDivision.division_short_name.$errors[0].$message
               "
               :content-loading="isFetchingInitialData"
             >
               <BaseInput
-                v-model="menuStore.currentMenu.path"
+                v-model="divisionStore.currentDivision.division_short_name"
                 :content-loading="isFetchingInitialData"
                 type="text"
-                name="path"
+                name="division_short_name"
                 class=""
-                :invalid="v$.currentMenu.path.$error"
-                @input="v$.currentMenu.path.$touch()"
+                :invalid="v$.currentDivision.division_short_name.$error"
+                @input="v$.currentDivision.division_short_name.$touch()"
               />
             </BaseInputGroup>
             <BaseInputGroup
-              :label="$t('menu.icon')"
+              :label="$t('division.url')"
               required
               :error="
-                v$.currentMenu.icon.$error &&
-                v$.currentMenu.icon.$errors[0].$message
+                v$.currentDivision.url.$error &&
+                v$.currentDivision.url.$errors[0].$message
               "
               :content-loading="isFetchingInitialData"
             >
               <BaseInput
-                v-model="menuStore.currentMenu.icon"
+                v-model="divisionStore.currentDivision.url"
                 :content-loading="isFetchingInitialData"
                 type="text"
-                name="icon"
+                name="url"
                 class=""
-                :invalid="v$.currentMenu.icon.$error"
-                @input="v$.currentMenu.icon.$touch()"
+                :invalid="v$.currentDivision.url.$error"
+                @input="v$.currentDivision.url.$touch()"
               />
-            </BaseInputGroup>
-            <BaseInputGroup
-              :label="$t('menu.location')"
-              :content-loading="isFetchingInitialData"
-              :error="
-                v$.currentMenu.location.$error &&
-                v$.currentMenu.location.$errors[0].$message
-              "
-              required
-            >
-              <BaseMultiselect
-                v-model="menuStore.currentMenu.location"
-                value-prop="id"
-                label="name"
-                track-by="name"
-                :content-loading="isFetchingInitialData"
-                :options="{'Sidebar':'Sidebar','Topbar':'Topbar'}"
-                searchable
-                :can-deselect="false"
-                :placeholder="$t('general.select')"
-                :invalid="v$.currentMenu.location.$error"
-                class="w-full"
-              >
-              </BaseMultiselect>
-            </BaseInputGroup>
-            <BaseInputGroup
-              :label="$t('menu.menu_status')"
-              :content-loading="isFetchingInitialData"
-              :error="
-                v$.currentMenu.menu_status.$error &&
-                v$.currentMenu.menu_status.$errors[0].$message
-              "
-              required
-            >
-              <BaseMultiselect
-                v-model="menuStore.currentMenu.menu_status"
-                value-prop="id"
-                label="name"
-                track-by="name"
-                :content-loading="isFetchingInitialData"
-                :options="{'Active':'Active','Inactive':'Inactive'}"
-                searchable
-                :can-deselect="false"
-                :placeholder="$t('general.select')"
-                :invalid="v$.currentMenu.menu_status.$error"
-                class="w-full"
-              >
-              </BaseMultiselect>
             </BaseInputGroup>
           </BaseInputGrid>
         </div>
@@ -184,7 +136,7 @@
 </template>
 
 <script setup>
-import { useMenuStore } from '@/scripts/admin/stores/menu'
+import { useDivisionStore } from '@/scripts/admin/stores/division'
 import useVuelidate from '@vuelidate/core'
 import {
   helpers,
@@ -195,7 +147,7 @@ import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 
-const menuStore = useMenuStore()
+const divisionStore = useDivisionStore()
 
 const customFieldValidationScope = 'customFields'
 
@@ -209,42 +161,40 @@ let isFetchingInitialData = ref(false)
 let active = ref(false)
 const isSaving = ref(false)
 
-const isEdit = computed(() => route.name === 'menu.edit')
+const isEdit = computed(() => route.name === 'division.edit')
 
 const pageTitle = computed(() =>
-  isEdit.value ? t('menu.edit_menu') : t('menu.new_menu'),
+  isEdit.value ? t('division.edit_division') : t('division.new_division'),
 )
 
 const rules = computed(() => {
   return {
-    currentMenu: {
+    currentDivision: {
       order_no: {
         required: helpers.withMessage(t('validation.required'), required)
       },
-      en: {
+      division_en_name: {
         required: helpers.withMessage(t('validation.required'), required),
         minLength: helpers.withMessage(
           t('validation.name_min_length', { count: 3 }),
           minLength(3)
         ),
       },
-      bn: {
+      division_bn_name: {
         required: helpers.withMessage(t('validation.required'), required),
         minLength: helpers.withMessage(
           t('validation.name_min_length', { count: 3 }),
           minLength(3)
         ),
       },
-      path: {
+      division_short_name: {
         required: helpers.withMessage(t('validation.required'), required),
+        minLength: helpers.withMessage(
+          t('validation.name_min_length', { count: 3 }),
+          minLength(3)
+        ),
       },
-      icon: {
-        required: helpers.withMessage(t('validation.required'), required),
-      },
-      location: {
-        required: helpers.withMessage(t('validation.required'), required),
-      },
-      menu_status: {
+      url: {
         required: helpers.withMessage(t('validation.required'), required),
       },
     },
@@ -252,18 +202,18 @@ const rules = computed(() => {
 })
 
 
-const v$ = useVuelidate(rules, menuStore, {
+const v$ = useVuelidate(rules, divisionStore, {
   $scope: customFieldValidationScope,
 })
 
-menuStore.resetCurrentMenu()
+divisionStore.resetCurrentDivision()
 
-menuStore.fetchMenuInitialSettings(isEdit.value)
+divisionStore.fetchDivisionInitialSettings(isEdit.value)
 
 const parentId = route.query.parent_id ?? null
 
-async function submitMenuData() {
-  //console.log('submitMenuData called')
+async function submitDivisionData() {
+  //console.log('submitDivisionData called')
   v$.value.$touch()
 
   if (v$.value.$invalid) {
@@ -273,24 +223,19 @@ async function submitMenuData() {
   isSaving.value = true
 
   let data = {
-    ...menuStore.currentMenu,
-    parent_id: parentId,
+    ...divisionStore.currentDivision
   }
   let response = null
 
   try {
     const action = isEdit.value
-      ? menuStore.updateMenu
-      : menuStore.addMenu
+      ? divisionStore.updateDivision
+      : divisionStore.addDivision
     response = await action(data)
   } catch (err) {
     isSaving.value = false
     return
   }
-  if(parentId){
-    router.push(`/admin/menu?parent_id=${parentId}`)
-    return
-  }
-  router.push(`/admin/menu`)
+  router.push(`/admin/global_settings/region_area_settings/division`)
 }
 </script>

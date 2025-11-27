@@ -2,6 +2,7 @@
 
 use App\Models\Customer;
 use App\Models\CustomField;
+use App\Models\Division;
 use App\Models\Estimate;
 use App\Models\ExchangeRateProvider;
 use App\Models\Expense;
@@ -45,6 +46,39 @@ return [
             'model' => Menu::class,
             'depends_on' => [
                 'view-menu',
+            ],
+        ],
+
+        // Division
+        [
+            'name' => 'view division',
+            'ability' => 'view-division',
+            'model' => Division::class,
+        ],
+        [
+            'name' => 'create division',
+            'ability' => 'create-division',
+            'model' => Division::class,
+            'depends_on' => [
+                'view-division',
+                'view-custom-field',
+            ],
+        ],
+        [
+            'name' => 'edit division',
+            'ability' => 'edit-division',
+            'model' => Division::class,
+            'depends_on' => [
+                'view-division',
+                'view-custom-field',
+            ],
+        ],
+        [
+            'name' => 'delete division',
+            'ability' => 'delete-division',
+            'model' => Division::class,
+            'depends_on' => [
+                'view-division',
             ],
         ],
 

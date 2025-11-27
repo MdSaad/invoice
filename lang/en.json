@@ -1689,6 +1689,8 @@
     "new_division": "New Division",
     "add_division": "Add Division",
     "edit_division": "Edit Division",
+    "save_division": "Save Division",
+    "update_division": "Update Division",
     "division_en_name": "Division Name(English)",
     "division_bn_name": "Division Name(Bangla)",
     "division_short_name": "Division Short Name",
@@ -1699,10 +1701,15 @@
     "division_confirm_delete": "You will not be able to recover this Division",
     "already_in_use": "Division is already in use",
     "deleted_message": "Division deleted successfully",
+    "updated_message": "Division updated successfully",
+    "created_message": "Division created successfully",
     "url": "URL",
     "latitude": "Latitude",
     "longitude": "Longitude",
-    "order_no": "Order No"
+    "order_no": "Order No",
+    "confirm_delete": "Are you sure you want to delete this division?",
+    "no_division": "No Division",
+    "list_of_division": "List of Division" 
   },
   "hr":{
     "employee": "Employee",

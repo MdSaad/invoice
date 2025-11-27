@@ -20,7 +20,7 @@ class DivisionController extends Controller
      */
     public function index(Request $request)
     {
-       // $this->authorize('viewAny', Division::class);
+        $this->authorize('viewAny', Division::class);
 
         $limit = $request->has('limit') ? $request->limit : 10;
 
@@ -88,8 +88,7 @@ class DivisionController extends Controller
      */
     public function delete(DivisionDeleteRequest $request)
     {
-        $this->authorize('delete multiple divisions');
-       // $this->authorize('delete', Division::class);
+        $this->authorize('deleteMultiple', Division::class);
 
         Division::deleteDivision($request->ids);
 

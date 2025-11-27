@@ -11,6 +11,11 @@ export default {
   DELETE_MENU: 'delete-menu',
   EDIT_MENU: 'edit-menu',
   VIEW_MENU: 'view-menu',
+  // division
+  CREATE_Division: 'create-division',
+  DELETE_Division: 'delete-division',
+  EDIT_Division: 'edit-division',
+  VIEW_Division: 'view-division',
 
   // Items
   CREATE_ITEM: 'create-item',
