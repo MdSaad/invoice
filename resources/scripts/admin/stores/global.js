@@ -69,6 +69,8 @@ export const useGlobalStore = (useWindow = false) => {
                 response.data.current_user_settings
               userStore.currentAbilities = response.data.current_user_abilities
 
+              console.log('User Abilities:', userStore.currentAbilities)
+
               // Module store
               moduleStore.apiToken = response.data.global_settings.api_token
               moduleStore.enableModules = response.data.modules

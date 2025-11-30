@@ -71,6 +71,11 @@ const ExpenseCreate = () => import('@/scripts/admin/views/expenses/Create.vue')
 const UserLayout = () => import('@/scripts/admin/views/users/UserLayout.vue')
 const UserIndex = () => import('@/scripts/admin/views/users/Index.vue')
 const UserCreate = () => import('@/scripts/admin/views/users/Create.vue')
+
+// Roles
+const RoleIndex = () => import('@/scripts/admin/views/roles/Index.vue')
+const RoleCreate = () => import('@/scripts/admin/views/roles/Create.vue')
+
 // Employee
 const EmployeeLayout = () => import('@/scripts/admin/views/employee/EmployeeLayout.vue')
 const EmployeeIndex = () => import('@/scripts/admin/views/employee/Index.vue')
@@ -442,6 +447,24 @@ export default [
                   name: 'users.edit',
                   meta: { isOwner: true },
                   component: UserCreate,
+                },
+                {
+                  path: 'roles',
+                  name: 'roles.index',
+                  meta: { isOwner: true },
+                  component: RoleIndex,
+                },
+                {
+                  path: 'roles/create',
+                  meta: { isOwner: true },
+                  name: 'roles.create',
+                  component: RoleCreate,
+                },
+                {
+                  path: 'roles/:id/edit',
+                  name: 'roles.edit',
+                  meta: { isOwner: true },
+                  component: RoleCreate,
                 }
         ]
       },

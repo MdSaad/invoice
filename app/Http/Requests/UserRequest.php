@@ -76,6 +76,7 @@ class UserRequest extends FormRequest
         if (empty($this->password)) {
             $data->forget('password');
         }
+        //dd($data);
         return $data->toArray();
     }
 }

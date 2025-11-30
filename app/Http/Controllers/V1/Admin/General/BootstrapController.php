@@ -28,7 +28,7 @@ class BootstrapController extends Controller
     {
         $current_user = $request->user();
         $current_user_settings = $current_user->getAllSettings();
-
+        //dd($current_user->getAllSettings());
        // $main_menu = $this->generateMenu('main_menu', $current_user);
         $main_menu = getMenuByLocation('Sidebar');
         $top_menu = getMenuByLocation('Topbar');

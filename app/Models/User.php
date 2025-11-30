@@ -344,7 +344,9 @@ class User extends Authenticatable implements HasMedia
 
     public static function createFromRequest(UserRequest $request)
     {
-        $user = self::create($request->getUserPayload());
+        $d = $request->getUserPayload();
+        dd($d); 
+        $user = self::create($d);
         return $user;
     }
 
